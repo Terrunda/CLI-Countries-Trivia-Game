@@ -1,0 +1,25 @@
+{
+  "name": "cli-countries-trivia-game",
+  "version": "1.0.0",
+  "description": "CLI-Trivia-Game",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "type":"module",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Terrunda/CLI-Countries-Trivia-Game.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Terrunda/CLI-Countries-Trivia-Game/issues"
+  },
+  "homepage": "https://github.com/Terrunda/CLI-Countries-Trivia-Game#readme"
+}
