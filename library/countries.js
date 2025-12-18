@@ -1,4 +1,4 @@
-function returnCountryTable() {
+export function returnCountryTable() {
   const countryTable = {
     "Africa": {
       "Algeria": {country: "Algeria", capital: "Algiers", difficulty: "Medium"},
@@ -213,8 +213,24 @@ function returnCountryTable() {
 }
 
 
-//Methods
-function sortCountriesByDifficulty(difficultyLevel) {
+//Methods: 
+
+export function getAllCountriesAsArray() {
+  const countryTable = returnCountryTable();
+  let countryArray = [];
+
+  for (continent in countryTable) {
+    const continentObject = countryTable[continent];
+    for (country in continentObject) {
+      const countryObject = continentObject[country];
+      countryArray.push(countryObject);
+    }
+  }
+
+  return countryArray;
+}
+
+export function sortCountriesByDifficulty(difficultyLevel) {
   const countryObject = returnCountryTable()
   let difficultySortedCountries = [];
 
@@ -230,7 +246,7 @@ function sortCountriesByDifficulty(difficultyLevel) {
   return difficultySortedCountries;
 }
 
-function sortCountriesByContinent(continentQuery) {
+export function sortCountriesByContinent(continentQuery) {
   const countryObject = returnCountryTable();
   let continentArray = [];
 
@@ -247,5 +263,13 @@ function sortCountriesByContinent(continentQuery) {
   return continentArray
 }
 
+export function searchCountryfromArray(array, countryQuery) {
+  for (let index = 0; index < array.length; index++) {
+    const countryObject = array[index];
+    if (countryObject.country === countryQuery) {
+      return true;
+    }
+  }
+  return false;
+}
 
-module.exports = {returnCountryTable, sortCountriesByContinent, sortCountriesByDifficulty};

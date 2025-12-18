@@ -6,7 +6,9 @@
   "directories": {
     "test": "test"
   },
-  "type": "commonjs",
+  "bin": {
+    "countries-trivia": "./workdirectory/index.js"},
+  "type": "module",
   "scripts": {
     "test": "jest"
   },
@@ -23,5 +25,8 @@
   "homepage": "https://github.com/Terrunda/CLI-Countries-Trivia-Game#readme",
   "devDependencies": {
     "jest": "^29.7.0"
+  },
+  "dependencies": {
+    "@inquirer/prompts": "^8.1.0"
   }
 }
