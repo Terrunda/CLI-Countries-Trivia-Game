@@ -1,13 +1,5 @@
 #!/usr/bin/env node
+import { checkbox } from '@inquirer/prompts';
 import {returnCountryTable, sortCountriesByContinent, sortCountriesByDifficulty} from '../library/countries.js'
+import chalk from 'chalk';
 
-async function startTrivia() {
-    console.log("--- Welcome to the Countries Trivia Game! ---");
-    const countryTable = returnCountryTable();
-    // 1. Pick a random continent
-    const continents = Object.keys(countryTable);
-    const randomContinent = continents[Math.floor(Math.random() * continents.length)];
-    console.log(randomContinent)
-}
-
-startTrivia();

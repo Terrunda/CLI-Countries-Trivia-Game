@@ -273,3 +273,17 @@ export function searchCountryfromArray(array, countryQuery) {
   return false;
 }
 
+//Used for choice functionality: 
+export function getRandomFourCountriesFromArray (array) {
+  let newArray = [];
+
+  while (newArray.length <= 3) {
+    let randomIndexValue = Math.floor(Math.random() * array.length);
+    const randomCountryObject = array[randomIndexValue];
+    newArray.push(randomCountryObject);
+  }
+
+  return newArray;
+}
+
+// Set correct country in array (Overwrite)
