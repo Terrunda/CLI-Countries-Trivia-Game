@@ -214,7 +214,6 @@ export function returnCountryTable() {
 
 
 //Methods: 
-
 export function getAllCountriesAsArray() {
   const countryTable = returnCountryTable();
   let countryArray = [];
@@ -273,7 +272,9 @@ export function searchCountryfromArray(array, countryQuery) {
   return false;
 }
 
-//Used for choice functionality: 
+//Used for choice functionality:
+
+//Used for multiple choice:
 export function getRandomFourCountriesFromArray (array) {
   let newArray = [];
 
@@ -286,4 +287,46 @@ export function getRandomFourCountriesFromArray (array) {
   return newArray;
 }
 
-// Set correct country in array (Overwrite)
+export function assignCorrectCountryToArray(correctCountry, array) {
+  const existenceCheck = searchCountryfromArray(array, correctCountry);
+  if (existenceCheck) {
+    return array;
+  }
+
+  const countryTable = returnCountryTable();
+
+  for (let continent in countryTable) {
+    const continentTable = countryTable[continent];
+
+    for (let countryData of Object.values(continentTable)) {
+      
+      if (countryData.country === correctCountry) {
+        let randomIndexValue = Math.floor(Math.random() * array.length);
+        array[randomIndexValue] = countryData;
+        return array;
+      }
+    }
+  }
+  return array;
+}
+
+//Used for checking user input
+export function listOfCountriesByContinent(continent) {
+  const listArray = [];
+  const arrayofObjects = sortCountriesByContinent(continent);
+
+  for (let objectValue of arrayofObjects) {
+    listArray.push(objectValue.country);
+  }
+  return listArray;
+}
+
+export function listofAllCountries() {
+  const listArray = [];
+  const arrayOfObjects = getAllCountriesAsArray();
+
+  for (let objectValue of arrayOfObjects) {
+    listArray.push(objectValue.country);
+  }
+  return listArray;
+}

@@ -16,3 +16,7 @@ function countdownTimer(startTime, interval) {
   return intervalID;
 }
 
+function startGameTriviaTimer(startTime = 5, interval = 1000) {
+  countdownTimer(startTime, interval);
+}
+
