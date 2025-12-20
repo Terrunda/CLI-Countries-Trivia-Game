@@ -3,6 +3,7 @@ const gameStats = {
     ["Date of Play"]: "",
     ["Completed"]: "",
     Score: "0/0",
+    DurationOfPlay: ""
 
 };
 

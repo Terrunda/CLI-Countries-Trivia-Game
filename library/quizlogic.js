@@ -20,6 +20,9 @@ function startGameTriviaTimer(startTime = 5, interval = 1000) {
   countdownTimer(startTime, interval);
 }
 
+
+function gameModeTimer(interval = 1000) {} 
+
 function startGameModeCountry(arrayOfCountries) {
   const workingArray = arrayOfCountries;
   
