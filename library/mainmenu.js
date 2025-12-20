@@ -2,9 +2,13 @@ import { select, input, checkbox, confirm} from '@inquirer/prompts';
 import chalk from 'chalk';
 const centertext = require('center-text');
 
+import { select, input, checkbox, confirm} from '@inquirer/prompts';
+import chalk from 'chalk';
+import centertext from 'center-text';
+
 async function displayMainMenu() {
-    const centered = centertext("Welcome to the Countries-Trivia");
-    console.log(chalk.bgHex("CCC5B9").bold(centered));
+    const centered = centertext("---Welcome to the Countries-Trivia---");
+    console.log(chalk.bgHex("B0B0B0").bold(centered));
 
     const mainMenuSelection = await select ({
         message: chalk.bold("[DESCRIPTION]: In this trivia, you can choose to challenge your general knowledge by either trying to name as many countries as possible or as selecting the correct capital cities for a given list of countries."),
@@ -59,23 +63,35 @@ async function displayMainMenu() {
                         }
                     ]
                 })
+
+                //Quiz functionality will start from here.
                 break;
             case "stats":
-
+                // Array of gameStats objects to go here
                 break;
             
             case "reset":
+                // use of gameStats function will go here
                 break;
 
             case "credits":
-                await select({ message: "Press Enter to go back", choices: [{ name: "Back", value: "back" }] })
+                console.log("placeholder");
+                await select({ message: "Press Enter to go back", choices: [{ name: "Back", value: "back" }]})
+                displayMainMenu();
                 break;
             
             case "quit":
-                console.log("Goodbye!");
-                break;
-        }
-}
+                const userQuitQuery = await confirm ({message: "Confirm?", default: true});
+
+                if (userQuitQuery) {
+                    console.log("Goodbye!");
+                    break;
+                } else if (!userQuitQuery) {
+                    displayMainMenu();
+                };
+        };
+};
 
 
 displayMainMenu();
+

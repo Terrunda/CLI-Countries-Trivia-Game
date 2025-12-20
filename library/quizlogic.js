@@ -20,3 +20,16 @@ function startGameTriviaTimer(startTime = 5, interval = 1000) {
   countdownTimer(startTime, interval);
 }
 
+function startGameModeCountry(arrayOfCountries) {
+  const workingArray = arrayOfCountries;
+  
+
+}
+
+function startGameModeCapitals(arrayOfObjects) {
+  
+}
+
+function determineStatistics() {
+  //Fired during the completion of a game or when a user terminates session before completion.
+}
