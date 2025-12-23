@@ -7,5 +7,6 @@ const gameStats = {
 
 };
 
+const playerStats = [];
 
 //Will be used to store game statistics.

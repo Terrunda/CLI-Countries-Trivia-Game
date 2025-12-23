@@ -1,5 +1,4 @@
-
-function countdownTimer(startTime, interval) {
+export function countdownTimer(startTime, interval) {
   let currentTime = startTime;
 
   const intervalID = setInterval(() => {
@@ -16,23 +15,38 @@ function countdownTimer(startTime, interval) {
   return intervalID;
 }
 
-function startGameTriviaTimer(startTime = 5, interval = 1000) {
+//Reserved for games.
+export function startGameTriviaTimer(startTime = 5, interval = 1000) {
   countdownTimer(startTime, interval);
 }
 
+//Game mode timer
+export function gameModeTimer(interval = 1000) {
+  const timerID = setInterval(() => {
+    const minuteCounter = Math.floor(currentTime / 60);
+    const secondCounter = currentTime % 60;
+    
+    console.log(`${minuteCounter}:${secondCounter}`);
 
-function gameModeTimer(interval = 1000) {} 
+  }, interval);
 
-function startGameModeCountry(arrayOfCountries) {
-  const workingArray = arrayOfCountries;
+  return timerID;
+} 
+
+export function stopgameModeTimer(timerID) {
+  clearInterval(timerID);
+}
+
+
+//Used for stats
+
+// Planned for future use
+export function saveGameStats() {
+
+}
+export function resetGameStats() {
+}
+
+export function loadGameStats() {
   
-
-}
-
-function startGameModeCapitals(arrayOfObjects) {
-  
-}
-
-function determineStatistics() {
-  //Fired during the completion of a game or when a user terminates session before completion.
-}
+};

@@ -1,12 +1,12 @@
 import { select, input, checkbox, confirm} from '@inquirer/prompts';
 import chalk from 'chalk';
-const centertext = require('center-text');
-
-import { select, input, checkbox, confirm} from '@inquirer/prompts';
-import chalk from 'chalk';
 import centertext from 'center-text';
 
-async function displayMainMenu() {
+
+//Countries functions 
+import {listOfCountriesByContinent, listofAllCountries} from '../library/countries.js'
+
+export async function displayMainMenu() {
   let isRunning = true;
 
   while (isRunning) {
@@ -37,8 +37,9 @@ async function displayMainMenu() {
 
         if (gameModeSelect === "back") {
           continue;
-        };
+        }
 
+        // --- COUNTRIES MODE ---
         if (gameModeSelect === "countries") {
           const continent = await select({
             message: "Select a continent:",
@@ -53,60 +54,48 @@ async function displayMainMenu() {
               { name: "Return to main menu", value: "back" }
             ]
           });
+
           if (continent === "back") {
             continue;
           }
 
-          // Start game here
+          let dataCallback;
+          if (continent === "all") {
+            dataCallback = listofAllCountries;
+          } else {
+            dataCallback = listOfCountriesByContinent;
+          }
+          await startGameModeForCountries(continent, dataCallback);
         }
 
         if (gameModeSelect === "capitals") {
-          const capitalCitiesGameMode = await select({
-            message: "Select the game mode for guessing the capital cities",
+          const comingSoonMessage = await select({
+            message: "Coming soon",
             choices: [
-              { name: "Difficulty based", value: "difficulty" },
-              { name: "Continents", value: "continents" }
+              { name: "Return to main menu", value: "back" }
             ]
           });
 
-          if (capitalCitiesGameMode === "continents") {
-            const capitalCitiesContinents = await select({
-              message: "Select the continent of your choice",
-              choices: [
-                { name: "Africa", value: "Africa" },
-                { name: "Asia", value: "Asia" },
-                { name: "Europe", value: "Europe" },
-                { name: "North America", value: "North America" },
-                { name: "South America", value: "South America" },
-                { name: "Oceania/Australia", value: "Oceania" },
-              ]
-            });
+          if (comingSoonMessage === "back") {
+            continue;
           }
-
-          if (capitalCitiesGameMode === "difficulty") {
-            const capitalCitiesDifficulty = await select({
-              message: "Select the difficulty level of your choice",
-              choices: [
-                { name: "Easy", value: "Easy" },
-                { name: "Medium", value: "Medium" },
-                {name: "Hard", value: "Hard" } 
-              ]
-            });
-          };
-          // Logic here
         }
         break;
 
       case "stats":
+        console.log(chalk.yellow("\nStatistics are coming soon!\n"));
+        await input({ message: "Press Enter to return..." });
         break;
 
       case "reset":
-        //Logic for resetting stats
+        console.log(chalk.yellow("\nReset function coming soon!\n"));
+        await input({ message: "Press Enter to return..." });
         break;
 
       case "credits":
-        console.log(chalk.yellow("\n--- CREDITS ---"));
-        console.log("Developed by Terrunda\n");
+        console.log(chalk.yellow("--- CREDITS ---"));
+        console.log("Created by Terrence Gift");
+        console.log("");
         await input({ message: "Press Enter to return..." });
         break;
 
@@ -120,6 +109,72 @@ async function displayMainMenu() {
     }
   }
 }
+async function startGameModeForCountries(value, callback) {
+
+  const fetchedCountryArray = callback(value);
+
+  let remainingCountries = [...fetchedCountryArray]; 
+
+  let guessedCountries = [];
+  
+  const totalCountries = remainingCountries.length;
+  let hasQuit = false;
+
+  console.clear();
+  console.log(chalk.magenta.bold(`\n--- QUIZ START: ${value === 'all' ? 'The World' : value} ---`));
+  console.log(chalk.dim(`There are ${totalCountries} countries to guess. Type 'quit' to exit.`));
 
 
-displayMainMenu();
+  while (remainingCountries.length > 0) {
+    
+
+    console.log(chalk.yellow(`\nScore: ${guessedCountries.length} / ${totalCountries}`));
+
+    const answer = await input({
+      message: `Name a country in ${value}:`,
+      required: true,
+    });
+
+    if (answer.trim().toLowerCase() === "quit") {
+      hasQuit = true;
+      break;
+    };
+
+    const foundIndex = remainingCountries.findIndex(
+      (countries) => countries.toLowerCase() === answer.trim().toLowerCase() //Used to accept lowercase answers and white spaces.
+    );
+
+    if (foundIndex !== -1) {
+      const countryName = remainingCountries[foundIndex];
+      
+      remainingCountries.splice(foundIndex, 1);
+      guessedCountries.push(countryName);
+
+      console.log(chalk.green(`✔ Correct! ${countryName} added.`));
+    } else {
+
+      const alreadyGuessed = guessedCountries.some(
+        (c) => c.toLowerCase() === answer.trim().toLowerCase()
+      );
+
+      if (alreadyGuessed) {
+        console.log(chalk.yellow(`⚠ You already guessed ${answer}!`));
+      } else {
+        console.log(chalk.red(`✘ '${answer}' is not a valid country in this list.`));
+      }
+    }
+  }
+
+  console.log(chalk.bgBlue("\n--- GAME OVER ---"));
+  if (!hasQuit) {
+    console.log(chalk.green.bold("CONGRATULATIONS! You named all of them!"));
+  }
+  console.log(`Final Score: ${guessedCountries.length} / ${totalCountries}`);
+  await input({ message: "Press Enter to return to Main Menu..." });
+};
+
+
+/* function startGameModeForCapitals(value, callback) {
+
+}; */
+

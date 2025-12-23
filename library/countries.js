@@ -210,7 +210,7 @@ export function returnCountryTable() {
     }
   };
   return countryTable
-}
+};
 
 
 //Methods: 
@@ -227,7 +227,7 @@ export function getAllCountriesAsArray() {
   }
 
   return countryArray;
-}
+};
 
 export function sortCountriesByDifficulty(difficultyLevel) {
   const countryObject = returnCountryTable()
@@ -243,7 +243,7 @@ export function sortCountriesByDifficulty(difficultyLevel) {
     }
   }
   return difficultySortedCountries;
-}
+};
 
 export function sortCountriesByContinent(continentQuery) {
   const countryObject = returnCountryTable();
@@ -260,7 +260,7 @@ export function sortCountriesByContinent(continentQuery) {
   }
 
   return continentArray
-}
+};
 
 export function searchCountryfromArray(array, countryQuery) {
   for (let index = 0; index < array.length; index++) {
@@ -270,7 +270,7 @@ export function searchCountryfromArray(array, countryQuery) {
     }
   }
   return false;
-}
+};
 
 //Used for choice functionality:
 
@@ -287,7 +287,7 @@ export function getRandomFourCountriesFromArray (array) {
   }
 
   return newArray;
-}
+};
 
 export function assignCorrectCountryToArray(correctCountry, array) {
   const existenceCheck = searchCountryfromArray(array, correctCountry);
@@ -310,7 +310,7 @@ export function assignCorrectCountryToArray(correctCountry, array) {
     }
   }
   return array;
-}
+};
 
 //Used for checking user input
 export function listOfCountriesByContinent(continent) {
@@ -321,7 +321,7 @@ export function listOfCountriesByContinent(continent) {
     listArray.push(objectValue.country);
   }
   return listArray;
-}
+};
 
 export function listofAllCountries() {
   const listArray = [];
@@ -331,4 +331,4 @@ export function listofAllCountries() {
     listArray.push(objectValue.country);
   }
   return listArray;
-}
+};
