@@ -94,8 +94,15 @@ export async function displayMainMenu() {
 
       case "credits":
         console.log(chalk.yellow("--- CREDITS ---"));
-        console.log("Created by Terrence Gift");
-        console.log("");
+        console.log("Created by Terrunda");
+
+        const uncenteredText = chalk.underline.bold("---Resources used---");
+        const centeredText = centertext(uncenteredText);
+
+        console.log(centeredText);
+        console.log(chalk.green("Chalk") + " used for CLI Styling");
+        console.log(chalk.green("@inquirer/prompts") +  " used for enabling the functionality of the CLI such as user prompts, selections and confirmations.");
+        console.log(chalk.green("center-text") + " for centering the ---Welcome to the Countries Trivia--- message.");
         await input({ message: "Press Enter to return..." });
         break;
 
